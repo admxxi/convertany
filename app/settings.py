@@ -25,7 +25,7 @@ SECRET_KEY = 'pcl94p1_n#z@qmg3^5(z=r9-=qe$+&qu!&i1+&_#)%6q6)=i-&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["51.158.172.31"]
+ALLOWED_HOSTS = ["localhost", "51.158.172.31"]
 
 
 # Application definition
