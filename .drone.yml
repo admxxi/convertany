@@ -8,14 +8,21 @@ platform:
 
 pipeline:
   build:
-    image: python:3.5.1-alpine
+    image: python:3.5.2
+    environment:
+      # I use dj_database_url to specify my DB settings
+      - DATABASE_URL=postgres://postgres@localhost
     commands:
-      - pip install --upgrade pip setuptools wheel
-      - pip wheel -r requirements.txt --wheel-dir=wheeldir --find-links=wheeldir
-      - pip wheel -r test-requirements.txt --wheel-dir=wheeldir --find-links=wheeldir
-      - pip install --no-index --find-links=wheeldir -r requirements.txt
-      - pip install --no-index --find-links=wheeldir -r test-requirements.txt
-      - python setup.py install
-      - flake8 dronedemo
-      - mkdir -p coverage
-      - nosetests -v tests/
+      - sleep 5 # (probably not necessary)
+      - pip3 install -r requirements.txt
+      - cd projectDir
+      - python ./manage.py test
+      - cd ..
+    when:
+      branch: [master]
+      event: [push, pull_request] # trigger step on push and pull events
+services:
+  database:
+    image: postgres
+    environment:
+      - DATABASE_URL=postgres://postgres@localhost
