@@ -1,10 +1,6 @@
-platform:
-  arch: amd64
-  os: linux
-
 pipeline:
   build:
-    image: python:3.5.2
+    image: python:3.6.4
     environment:
       # I use dj_database_url to specify my DB settings
       - DATABASE_URL=postgres://postgres@localhost
